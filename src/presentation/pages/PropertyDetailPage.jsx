@@ -193,12 +193,20 @@ export default function PropertyDetailPage({ propertyId, navigateTo, routeParams
               </div>
 
               {/* Action Button */}
-              <button
-                onClick={handleBookPress}
-                className="w-full py-4 text-center font-bold text-white bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 rounded-xl shadow-lg shadow-teal-500/10 active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Book Tour Inspection
-              </button>
+              <div className="space-y-3">
+                <button
+                  onClick={handleBookPress}
+                  className="w-full py-4 text-center font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  Book Tour Inspection
+                </button>
+                <button
+                  onClick={() => navigateTo("purchase-property", { propertyId: property.id })}
+                  className="w-full py-4 text-center font-bold text-white bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 rounded-xl shadow-lg shadow-teal-500/10 active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  Buy Now / Make Offer
+                </button>
+              </div>
             </div>
           </div>
         </div>

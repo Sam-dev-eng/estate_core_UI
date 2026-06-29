@@ -32,10 +32,8 @@ export default function Navbar({ currentPage, navigateTo }) {
   };
 
   const handleLogout = () => {
-    if (window.confirm("Are you sure you want to log out of Estate Core?")) {
-      logout();
-      handleNav("landing");
-    }
+    logout();
+    handleNav("landing");
   };
 
   return (

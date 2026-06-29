@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AuthUseCase } from "../../application/usecases/AuthUseCase";
+import { useAuth } from "../context/useAuth";
 
 const ADMIN_SESSION_KEY = "estate_core_admin_session";
 
@@ -14,11 +15,19 @@ export function clearAdminSession() {
 }
 
 export default function AdminLoginPage({ navigateTo }) {
+  const { logout } = useAuth();
   const [username, setUsername]  = useState("");
   const [password, setPassword]  = useState("");
   const [error, setError]        = useState("");
   const [loading, setLoading]    = useState(false);
   const [showPass, setShowPass]  = useState(false);
+
+  useEffect(() => {
+    // Clear regular user session
+    logout();
+    // Clear admin session
+    clearAdminSession();
+  }, [logout]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

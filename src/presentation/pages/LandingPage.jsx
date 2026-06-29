@@ -311,6 +311,7 @@ export default function LandingPage({ navigateTo, routeParams }) {
                   key={prop.id}
                   property={prop}
                   onBook={handleBookClick}
+                  onPurchase={(p) => navigateTo("purchase-property", { propertyId: p.id })}
                   onClick={() => navigateTo("property-detail", { propertyId: prop.id })}
                 />
               ))}

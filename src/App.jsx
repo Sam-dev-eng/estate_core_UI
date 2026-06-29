@@ -8,6 +8,8 @@ import SignUpPage from "./presentation/pages/SignUpPage";
 import AdminDashboard from "./presentation/pages/AdminDashboard";
 import AdminLoginPage, { isAdminAuthenticated } from "./presentation/pages/AdminLoginPage";
 import PropertyDetailPage from "./presentation/pages/PropertyDetailPage";
+import PurchasePropertyPage from "./presentation/pages/PurchasePropertyPage";
+
 
 function MainApp() {
   const [currentPage, setCurrentPage] = useState("landing");
@@ -36,9 +38,15 @@ function MainApp() {
     } else if (path === "/signup") {
       setCurrentPage("signup");
     } else if (path.startsWith("/property/")) {
-      const id = path.split("/property/")[1];
-      setCurrentPage("property-detail");
-      setRouteParams({ propertyId: id });
+      const parts = path.split("/");
+      const id = parts[2];
+      if (parts[3] === "purchase") {
+        setCurrentPage("purchase-property");
+        setRouteParams({ propertyId: id });
+      } else {
+        setCurrentPage("property-detail");
+        setRouteParams({ propertyId: id });
+      }
     } else {
       setCurrentPage("landing");
     }
@@ -77,7 +85,10 @@ function MainApp() {
       path = "/signup";
     } else if (page === "property-detail") {
       path = `/property/${params.propertyId || params.id}`;
+    } else if (page === "purchase-property") {
+      path = `/property/${params.propertyId || params.id}/purchase`;
     }
+
 
     window.history.pushState(null, "", path);
     setCurrentPage(page);
@@ -115,6 +126,13 @@ function MainApp() {
             propertyId={routeParams.propertyId}
             navigateTo={navigateTo}
             routeParams={routeParams}
+          />
+        )}
+
+        {currentPage === "purchase-property" && (
+          <PurchasePropertyPage
+            propertyId={routeParams.propertyId}
+            navigateTo={navigateTo}
           />
         )}
       </main>

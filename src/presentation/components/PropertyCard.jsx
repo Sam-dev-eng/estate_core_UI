@@ -3,7 +3,7 @@ import React from "react";
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80";
 
-export default function PropertyCard({ property, onBook, onClick }) {
+export default function PropertyCard({ property, onBook, onPurchase, onClick }) {
   const displayImage = property.images?.[0] || FALLBACK_IMAGE;
 
   return (
@@ -71,15 +71,26 @@ export default function PropertyCard({ property, onBook, onClick }) {
           </p>
         </div>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onBook(property);
-          }}
-          className="w-full py-1.5 sm:py-2.5 text-[11px] sm:text-sm font-semibold rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:bg-teal-500 hover:text-white hover:border-teal-500 active:scale-[0.98] transition-all duration-300 cursor-pointer"
-        >
-          Book Tour
-        </button>
+        <div className="flex gap-2 mt-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onBook(property);
+            }}
+            className="flex-1 py-1.5 sm:py-2.5 text-[10px] sm:text-xs font-semibold rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 hover:bg-teal-500 hover:text-white hover:border-teal-500 active:scale-[0.98] transition-all duration-300 cursor-pointer"
+          >
+            Book Tour
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onPurchase(property);
+            }}
+            className="flex-1 py-1.5 sm:py-2.5 text-[10px] sm:text-xs font-semibold rounded-xl bg-gradient-to-r from-teal-500 to-indigo-600 text-white hover:from-teal-400 hover:to-indigo-500 active:scale-[0.98] transition-all duration-300 cursor-pointer"
+          >
+            Buy Now
+          </button>
+        </div>
       </div>
     </article>
   );
